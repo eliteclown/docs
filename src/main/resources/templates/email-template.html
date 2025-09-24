@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: Arial; }
+        .card { border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+        .link { color: blue; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2 th:text="${title}">Meeting Invitation</h2>
+    <p>Dear <strong th:text="${name}">User</strong>,</p>
+
+    <p>You are invited to a Microsoft Teams session:</p>
+
+    <p><strong>Session ID:</strong> <span th:text="${sessionId}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${date}"></span></p>
+    <p><strong>Time:</strong> <span th:text="${time}"></span></p>
+
+    <p><a class="link" th:href="${meetingLink}" target="_blank">Join Teams Meeting</a></p>
+
+    <br>
+    <p>Regards,<br/>CyberDiction Team</p>
+</div>
+</body>
+</html>
