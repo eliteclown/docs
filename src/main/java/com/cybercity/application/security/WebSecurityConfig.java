@@ -1,5 +1,6 @@
 package com.cybercity.application.security;
 
+import com.cybercity.application.entities.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +32,8 @@ public class WebSecurityConfig {
                 .sessionManagement(sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").hasAnyRole("HOTEL_MANAGER","GUEST")
+                        .requestMatchers("/admin/**/**","/course/**/**","/webinar/**/**","/api/webinar-enrollments/webinar/{webinarId}","/api/webinar-enrollments/{id}").hasRole(String.valueOf(Role.ADMIN))
+                        .requestMatchers("/enroll/get/{userId}","/user/update/{userId}","/api/webinar-enrollments/enroll","/api/webinar-enrollments/{id}","/api/webinar-enrollments/user/{userId}").hasRole(String.valueOf(Role.STUDENT))
                         .requestMatchers("/bookings/**").authenticated()
                         .anyRequest().permitAll()
                 )
